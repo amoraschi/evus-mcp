@@ -53,5 +53,5 @@ jobs:
         with:
           tag_name: ${{ needs.check-version.outputs.version }}
           name: ${{ needs.check-version.outputs.version }}
-          files: target/release/evus-manager.exe
+          files: target/release/evus-mcp.exe
           generate_release_notes: true
