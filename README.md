@@ -4,6 +4,10 @@ MCP server exposing **ev.us.es** (Blackboard Learn, Universidad de Sevilla / UVU
 
 Rust, stdio transport ([rmcp](https://crates.io/crates/rmcp)). Handles the full SAML2 + TOTP SSO login chain headlessly and re-authenticates automatically on session expiry.
 
+#### DOWNLOAD
+
+[Latest release](https://github.com/amoraschi/evus-mcp/releases/latest)
+
 #### BUILD
 
 ```
