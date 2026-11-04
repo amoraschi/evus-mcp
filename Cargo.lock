@@ -969,7 +969,7 @@ dependencies = [
 
 [[package]]
 name = "evus-mcp"
-version = "2026.11.3"
+version = "2026.11.2"
 dependencies = [
  "anyhow",
  "clap",
