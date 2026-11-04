@@ -6,11 +6,9 @@
 use anyhow::{bail, Context, Result};
 use keyring::Entry;
 use std::io::{self, Write};
-use zeroize::{Zeroize, ZeroizeOnDrop};
 
 const SERVICE: &str = "evus-mcp";
 
-#[derive(Zeroize, ZeroizeOnDrop)]
 pub struct Credentials {
     pub username: String,
     pub password: String,
@@ -47,19 +45,14 @@ pub fn load_credentials() -> Result<Credentials> {
 /// history or a file rather than on terminal echo suppression) and store in
 /// the OS keychain.
 pub fn prompt_and_store() -> Result<()> {
-    let mut username = prompt("UVUS username: ")?;
-    let mut password = prompt("UVUS password: ")?;
-    let mut totp_secret = prompt("TOTP base32 secret: ")?;
+    let username = prompt("UVUS username: ")?;
+    let password = prompt("UVUS password: ")?;
+    let totp_secret = prompt("TOTP base32 secret: ")?;
 
-    let result = set("uvus-username", &username)
-        .and_then(|_| set("uvus-password", &password))
-        .and_then(|_| set("totp-secret", &totp_secret));
+    set("uvus-username", &username)?;
+    set("uvus-password", &password)?;
+    set("totp-secret", &totp_secret)?;
 
-    username.zeroize();
-    password.zeroize();
-    totp_secret.zeroize();
-
-    result?;
     println!("Stored in OS keychain under service 'evus-mcp'.");
     Ok(())
 }
@@ -69,7 +62,5 @@ fn prompt(label: &str) -> Result<String> {
     io::stdout().flush()?;
     let mut line = String::new();
     io::stdin().read_line(&mut line)?;
-    let trimmed = line.trim_end_matches(['\r', '\n']).to_string();
-    line.zeroize();
-    Ok(trimmed)
+    Ok(line.trim_end_matches(['\r', '\n']).to_string())
 }
