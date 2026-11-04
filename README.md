@@ -1,6 +1,6 @@
 ### EVUS MCP
 
-MCP server exposing **ev.us.es** (Blackboard Learn, Universidad de Sevilla / UVUS) to Claude: courses, announcements, grades, content, attachments, and to-do items.
+MCP server exposing `ev.us.es` (Blackboard Learn, Universidad de Sevilla / UVUS) to Claude: courses, announcements, grades, content, attachments, and to-do items.
 
 Rust, stdio transport ([rmcp](https://crates.io/crates/rmcp)). Handles the full SAML2 + TOTP SSO login chain headlessly and re-authenticates automatically on session expiry.
 
